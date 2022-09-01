@@ -7,6 +7,8 @@
 #include <list>
 #include <unordered_map>
 
+using namespace std;
+
 #include "IOInterface.h"
 #include "MyException.h"
 #include "Customer.h"
@@ -16,9 +18,11 @@
 #include "Hybrid.h"
 #include "Warehouse.h"
 #include "RentalShop.h"
+#include "InteractiveMenu.h"
 
-using namespace std;
 int main() {
-    cout << "Hello, World!" << endl;
+    InteractiveMenu *m = InteractiveMenu::getInstance();
+    m->menu();
+    InteractiveMenu::deleteInstance();
     return 0;
 }
