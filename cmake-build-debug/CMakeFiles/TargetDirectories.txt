@@ -1,0 +1,3 @@
+C:/Users/George/Desktop/Marire POO/cmake-build-debug/CMakeFiles/Marire_POO.dir
+C:/Users/George/Desktop/Marire POO/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/George/Desktop/Marire POO/cmake-build-debug/CMakeFiles/rebuild_cache.dir
