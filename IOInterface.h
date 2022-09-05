@@ -6,7 +6,7 @@
 #define MAIN_CPP_IOINTERFACE_H
 class IOInterface{
 public:
-    virtual std::istream& read(std::istream& in) = 0;
-    virtual std::ostream& write(std::ostream& out) const = 0;
+    virtual std::istream& write(std::istream& in) = 0;
+    virtual std::ostream& read(std::ostream& out) const = 0;
 };
 #endif //MAIN_CPP_IOINTERFACE_H

@@ -1,5 +1,7 @@
 #include <iostream>
+#include <windows.h>
 #include <exception>
+#include <typeinfo>
 #include <cstring>
 #include <string>
 #include <vector>
@@ -12,15 +14,14 @@ using namespace std;
 #include "IOInterface.h"
 #include "MyException.h"
 #include "Customer.h"
-#include "Car.h"
-#include "Electric.h"
-#include "Gasoline.h"
-#include "Hybrid.h"
-#include "Warehouse.h"
-#include "RentalShop.h"
-#include "InteractiveMenu.h"
+#include "Car.h"                // base class
+#include "Electric.h"           // derived class 1
+#include "Gasoline.h"           // derived class 2
+#include "Hybrid.h"             // diamond class
+#include "Warehouse.h"          // template class
+#include "InteractiveMenu.h"    // singleton class
 
-int main() {
+int main(){
     InteractiveMenu *m = InteractiveMenu::getInstance();
     m->menu();
     InteractiveMenu::deleteInstance();

@@ -5,12 +5,6 @@
 #ifndef MAIN_CPP_CUSTOMER_H
 #define MAIN_CPP_CUSTOMER_H
 
-using std::string;
-using std::istream;
-using std::ostream;
-using std::cin;
-using std::cout;
-
 class Customer{
     static int indexID;
     const int ID;
@@ -30,8 +24,8 @@ public:
 
     Customer& operator++();
     const Customer operator++(int);
-    int operator+(const Customer& ob);
-    int operator-(const Customer& ob);
+    int operator+(const Customer& ob) const;
+    int operator-(const Customer& ob) const;
     bool operator <=(const Customer& ob) const;
     bool operator ==(const Customer& ob);
     explicit operator int() const;
@@ -79,13 +73,14 @@ Customer &Customer::operator=(const Customer &ob) {
     return *this;
 }
 Customer::~Customer() {
-    delete[] this->occupation;
+    if(this->occupation != nullptr)
+        delete[] this->occupation;
 }
 
 istream &operator>>(istream &in, Customer &ob) {
     while(true) {
         try {
-            cout << "First name:";
+            cout << ">> First name: ";
             in >> ob.f_name;
             if (ob.f_name.find_first_not_of(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") != string::npos)
                 throw MyException();
@@ -102,7 +97,7 @@ istream &operator>>(istream &in, Customer &ob) {
     }
     while(true) {
         try {
-            cout << "Last name:";
+            cout << ">> Last name: ";
             in >> ob.l_name;
             if (ob.l_name.find_first_not_of(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") != string::npos)
                 throw MyException();
@@ -119,7 +114,7 @@ istream &operator>>(istream &in, Customer &ob) {
     }
     while(true) {
         try {
-            cout << "Age:";
+            cout << ">> Age: ";
             in >> ob.age;
             if(in.fail()) {
                 in.clear();
@@ -137,7 +132,7 @@ istream &operator>>(istream &in, Customer &ob) {
             cout << "Error! The age of the customer cannot be younger than 16 years. \n";
         }
     }
-    cout << "Occupation: ";
+    cout << ">> Occupation: ";
     delete[] ob.occupation;
     char s[50];
     in >> s;
@@ -149,7 +144,7 @@ ostream &operator<<(ostream &out, const Customer &ob) {
     out << "ID: " << ob.ID << '\n';
     out << "First name: " << ob.f_name << '\n';
     out << "Last name: " << ob.l_name << '\n';
-    out << "Age: " << ob.age << '\n';
+    out << "Age: " << ob.age << " years \n";
     out << "Occupation: " << ob.occupation << '\n';
     return out;
 }
@@ -163,16 +158,16 @@ const Customer Customer::operator++(int){
     this->age++;
     return c;
 }
-int Customer::operator+(const Customer& ob){
+int Customer::operator+(const Customer& ob) const{
     return this->age+ob.age;
 }
-int Customer::operator-(const Customer& ob){
+int Customer::operator-(const Customer& ob) const{
     return this->age-ob.age;
 }
-bool Customer::operator <= (const Customer& ob) const{
+bool Customer::operator <=(const Customer& ob) const{
     return this->age <= ob.age;
 }
-bool Customer::operator == (const Customer& ob){
+bool Customer::operator ==(const Customer& ob){
     return this->age == ob.age && (strcmp(this->occupation, ob.occupation) == 0);
 }
 Customer::operator int() const{
