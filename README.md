@@ -1,1 +1,1 @@
-# car-rental-shop
+![console interactive menu](https://github.com/Gheorghe-Nistor/car-rental-shop/blob/main/console_menu.png)

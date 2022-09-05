@@ -7,10 +7,23 @@
 
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 #define pressEnter   cout << "\n(press enter to continue)"; cin.ignore(); cin.ignore()
-#define blueColor SetConsoleTextAttribute(hConsole, 3);
-#define greenColor SetConsoleTextAttribute(hConsole, 10);
-#define yellowColor SetConsoleTextAttribute(hConsole, 14);
-#define whiteColor SetConsoleTextAttribute(hConsole, 15);
+#define backMenu     whiteColor(); cout << "0 - back\n"; yellowColor();
+
+void blueColor(){
+    SetConsoleTextAttribute(hConsole, 3);
+}
+void greenColor(){
+    SetConsoleTextAttribute(hConsole, 10);
+}
+void redColor(){
+    SetConsoleTextAttribute(hConsole, 12);
+}
+void yellowColor() {
+    SetConsoleTextAttribute(hConsole, 14);
+}
+void whiteColor() {
+    SetConsoleTextAttribute(hConsole, 15);
+}
 class InteractiveMenu{
     vector<Customer*> customersList;
     Warehouse<Car*> carsList;
@@ -43,18 +56,17 @@ void InteractiveMenu::customer() {
     int k = 1;
     while(k) {
         system("cls");
-        blueColor;
+        blueColor();
         cout << "~> CUSTOMER MENU <~\n";
-        yellowColor;
-        cout << "0 - back   \n";
+        backMenu
         cout << "1 - create \n";
         cout << "2 - read   \n";
         cout << "3 - update \n";
         cout << "4 - delete \n";
-        whiteColor;
+        whiteColor();
         cout << ">> Command: ";
         cin >> k;
-        yellowColor;
+        yellowColor();
         if(k && k <= 4)
             system("cls");
         switch (k) {
@@ -62,9 +74,9 @@ void InteractiveMenu::customer() {
                 break;
             case 1: {
                 auto* ob = new Customer();
-                whiteColor;
+                whiteColor();
                 cin >> *ob;
-                yellowColor;
+                yellowColor();
                 customersList.push_back(ob);
                 break;
             }
@@ -88,54 +100,53 @@ void InteractiveMenu::customer() {
                 }
                 int k1 = 1;
                 cout << *customersList[index] << '\n';
-                greenColor;
+                greenColor();
                 cout << "~> CUSTOMER UPDATE <~\n";
-                yellowColor;
-                cout << "0 - back       \n";
+                backMenu
                 cout << "1 - First name \n";
                 cout << "2 - Last name  \n";
                 cout << "3 - Age        \n";
                 cout << "4 - Occupation \n";
-                whiteColor;
+                whiteColor();
                 cout << ">> Command: ";
                 cin >> k1;
-                yellowColor;
+                yellowColor();
                 switch (k1) {
                     case 0:
                         break;
                     case 1:{
                         string f_name;
-                        whiteColor;
+                        whiteColor();
                         cout << ">> Update first name: ";
                         cin >> f_name;
-                        yellowColor;
+                        yellowColor();
                         customersList[index]->setFName(f_name);
                         break;
                     }
                     case 2:{
                         string l_name;
-                        whiteColor;
+                        whiteColor();
                         cout << ">> Update last name: ";
                         cin >> l_name;
-                        yellowColor;
+                        yellowColor();
                         customersList[index]->setLName(l_name);
                         break;
                     }
                     case 3:{
                         int age;
-                        whiteColor;
+                        whiteColor();
                         cout << ">> Update age: ";
                         cin >> age;
-                        yellowColor;
+                        yellowColor();
                         customersList[index]->setAge(age);
                         break;
                     }
                     case 4:{
                         char* occupation = new char[50];
-                        whiteColor;
+                        whiteColor();
                         cout << ">> Update occupation: ";
                         cin >> occupation;
-                        yellowColor;
+                        yellowColor();
                         customersList[index]->setOccupation(occupation);
                         delete[] occupation;
                         break;
@@ -149,10 +160,10 @@ void InteractiveMenu::customer() {
             case 4: {
                 int id, index = 0;
                 bool found = false;
-                whiteColor;
+                whiteColor();
                 cout << ">> Customer ID: ";
                 cin >> id;
-                yellowColor;
+                yellowColor();
                 cout << '\n';
                 for(auto & it: customersList){
                     if(it->getID() == id) {
@@ -178,33 +189,31 @@ void InteractiveMenu::car(){
     int k = 1;
     while(k) {
         system("cls");
-        blueColor;
+        blueColor();
         cout << "~> CAR MENU <~\n";
-        yellowColor;
-        cout << "0 - back   \n";
+        backMenu
         cout << "1 - create \n";
         cout << "2 - read   \n";
         cout << "3 - update \n";
         cout << "4 - delete \n";
-        whiteColor;
+        whiteColor();
         cout << ">> Command: ";
         cin >> k;
-        yellowColor;
+        yellowColor();
         if(k && k <= 4)
             system("cls");
         switch (k) {
             case 0:
                 break;
             case 1: {
-                greenColor;
+                greenColor();
                 cout << "~> CREATE A CAR <~\n";
-                yellowColor;
-                cout << "0 - back \n";
+                backMenu
                 cout << "1 - gasoline \n";
                 cout << "2 - electric \n";
                 cout << "3 - hybrid \n";
                 auto* c = new Customer();
-                whiteColor;
+                whiteColor();
                 int k1;
                 cout << ">> Command: ";
                 cin >> k1;
@@ -232,12 +241,12 @@ void InteractiveMenu::car(){
                         break;
                     }
                     default: {
-                        yellowColor;
+                        yellowColor();
                         cout << "\n<< Enter a number between 0 and 3 >>\n";
                         break;
                     }
                 }
-                yellowColor;
+                yellowColor();
                 break;
             }
             case 2: {
@@ -255,10 +264,9 @@ void InteractiveMenu::car(){
                 }
                 int k1 = 1;
                 cout << *ob << '\n';
-                greenColor;
+                greenColor();
                 cout << "~> CAR UPDATE <~\n";
-                yellowColor;
-                cout << "0 - back   \n";
+                backMenu
                 cout << "1 - Model  \n";
                 cout << "2 - Km     \n";
                 cout << "3 - Year   \n";
@@ -270,39 +278,39 @@ void InteractiveMenu::car(){
                     cout << "4 - Fuel type \n";
                     cout << "5 - Range     \n";
                 }
-                whiteColor;
+                whiteColor();
                 cout << ">> Command: ";
                 cin >> k1;
-                yellowColor;
+                yellowColor();
                 if(k1 <= 3) {
                     switch (k1) {
                         case 0:
                             break;
                         case 1: {
                             string model;
-                            whiteColor;
+                            whiteColor();
                             cout << ">> Update model: ";
                             cin.ignore();
                             getline(cin, model);
-                            yellowColor;
+                            yellowColor();
                             ob->setModel(model);
                             break;
                         }
                         case 2: {
                             int km;
-                            whiteColor;
+                            whiteColor();
                             cout << ">> Update km: ";
                             cin >> km;
-                            yellowColor;
+                            yellowColor();
                             ob->setKm(km);
                             break;
                         }
                         case 3: {
                             int year;
-                            whiteColor;
+                            whiteColor();
                             cout << ">> Update year: ";
                             cin >> year;
-                            yellowColor;
+                            yellowColor();
                             ob->setYear(year);
                             break;
                         }
@@ -318,18 +326,18 @@ void InteractiveMenu::car(){
                             throw bad_cast();
                         if(k1 == 4){
                             string fuel_type;
-                            whiteColor;
+                            whiteColor();
                             cout << ">> Update fuel type: ";
                             cin >> fuel_type;
-                            yellowColor;
+                            yellowColor();
                             dc->setFuelType(fuel_type);
                         }
                         else if(k1 == 5){
                             double range;
-                            whiteColor;
+                            whiteColor();
                             cout << ">> Update range: ";
                             cin >> range;
-                            yellowColor;
+                            yellowColor();
                             dc->setRange(range);
                         }
                         else
@@ -342,10 +350,10 @@ void InteractiveMenu::car(){
                                 throw bad_cast();
                             if(k1 == 4){
                                 double range;
-                                whiteColor;
+                                whiteColor();
                                 cout << ">> Update range: ";
                                 cin >> range;
-                                yellowColor;
+                                yellowColor();
                                 dc->setRange(range);
                             }
                             else
@@ -355,10 +363,10 @@ void InteractiveMenu::car(){
                             auto* dc = dynamic_cast<Gasoline*>(ob);
                             if(k1 == 4){
                                 string fuel_type;
-                                whiteColor;
+                                whiteColor();
                                 cout << ">> Update fuel type: ";
                                 cin >> fuel_type;
-                                yellowColor;
+                                yellowColor();
                                 dc->setFuelType(fuel_type);
                             }
                             else
@@ -370,10 +378,10 @@ void InteractiveMenu::car(){
             }
             case 4: {
                 int id;
-                whiteColor;
+                whiteColor();
                 cout << ">> Car ID: ";
                 cin >> id;
-                yellowColor;
+                yellowColor();
                 cout << '\n';
                 Car* ob = carsList.getCardById(id);
                 if(ob != nullptr){
@@ -396,23 +404,22 @@ void InteractiveMenu::rentCar(){
     int k = 1;
     while(k) {
         system("cls");
-        blueColor;
-        cout << "~> RENT CAR MENU <~\n";
-        yellowColor;
-        cout << "0 - back               \n";
-        cout << "1 - available cars     \n";
-        cout << "2 - unavailable cars   \n";
-        cout << "3 - rent car           \n";
-        cout << "4 - active customers   \n";
-        cout << "5 - customer & car     \n";
-        cout << "6 - end the car rental \n";
-        cout << "7 - rental history     \n";
-        whiteColor;
+        blueColor();
+        cout << "~> CAR RENTAL MENU <~\n";
+        backMenu
+        cout << "1 - available cars         \n";
+        cout << "2 - unavailable cars       \n";
+        cout << "3 - rent car               \n";
+        cout << "4 - active customers       \n";
+        cout << "5 - list of customer & car \n";
+        cout << "6 - end the car rental     \n";
+        cout << "7 - rental history         \n";
+        whiteColor();
         cout << ">> Command: ";
         cin >> k;
         if(k > 0 && k <= 7)
             system("cls");
-        yellowColor;
+        yellowColor();
         switch (k) {
             case 0:{
                 break;
@@ -428,10 +435,10 @@ void InteractiveMenu::rentCar(){
             case 3:{
                 string currentRecord = "";
                 int customerID, carID, index = 0;
-                whiteColor;
+                whiteColor();
                 cout << ">> Customer ID: ";
                 cin >> customerID;
-                yellowColor;
+                yellowColor();
                 cout << '\n';
                 Customer* customer;
                 bool is_in;
@@ -453,10 +460,10 @@ void InteractiveMenu::rentCar(){
                     cout << "The customer with ID " << customerID << " was not found.\n";
                     break;
                 }
-                whiteColor;
+                whiteColor();
                 cout << ">> Car ID: ";
                 cin >> carID;
-                yellowColor;
+                yellowColor();
                 cout << '\n';
                 Car* ob = carsList.getCardById(carID);
                 if(ob != nullptr){
@@ -495,10 +502,10 @@ void InteractiveMenu::rentCar(){
             }
             case 6:{
                 int index, customerID, carID;
-                whiteColor;
+                whiteColor();
                 cout << ">> Customer & Car ID: ";
                 cin >> index;
-                yellowColor;
+                yellowColor();
                 if(index >= 0 and index < customerCar.size()){
                     auto it = customerCar.begin();
                     std::advance(it, index);
@@ -541,17 +548,18 @@ void InteractiveMenu::menu(){
 
     while(k) {
         system("cls");
-        blueColor;
+        blueColor();
         cout << "~> MAIN MENU <~\n";
-        yellowColor;
+        redColor();
         cout << "0 - exit \n";
+        yellowColor();
         cout << "1 - customers  [CRUD] \n";
         cout << "2 - cars       [CRUD] \n";
-        cout << "3 - rent car          \n";
-        whiteColor;
+        cout << "3 - car rental         \n";
+        whiteColor();
         cout << ">> Command: ";
         cin >> k;
-        yellowColor;
+        yellowColor();
         switch (k) {
             case 0: {
                 cout << "\nSee you soon! \n";
